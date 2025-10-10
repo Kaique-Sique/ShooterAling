@@ -10,10 +10,10 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class shooterSubsystem extends SubsystemBase {
-  private static final SparkMax MotorShooter;
+  //private static final SparkMax MotorShooter;
 
   public shooterSubsystem() {
-    MotorShooter = new SparkMax(1, MotorType.Brushless);
+    //MotorShooter = new SparkMax(shooterConstants., MotorType.Brushless);
   }
 
   @Override
