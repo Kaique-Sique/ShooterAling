@@ -276,6 +276,8 @@ public final class Constants {
 
       public static final double kDiameterBigWheel = 4 * 2.54;
       public static final double kDiameterSmallWheel = 2 * 2.54; 
+
+      public static final int kShooterBigWheelID = 24;
     }
   }
 
