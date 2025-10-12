@@ -8,11 +8,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OIConstants.JoystickDriverConstants;
 import frc.robot.commands.ShootBall;
+import frc.robot.subsystems.shooter.ShooterBaseAling;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 public class RobotContainer {
   // Subsystens instance 
   public static final ShooterSubsystem shooterSubsys = new ShooterSubsystem();
+  public static final ShooterBaseAling baseShooter = new ShooterBaseAling();
 
   // Sequential Commands 
   public static final ShootBall m_shootBall = new ShootBall();
