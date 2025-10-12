@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -19,7 +20,8 @@ public class ShootBall extends SequentialCommandGroup {
     addRequirements(shooterSubsys);
     addCommands(
       new RunCommand((()-> shooterSubsys.setMPS(1)), shooterSubsys),
-      new WaitCommand(3)
+      new WaitCommand(3),
+      new InstantCommand((()-> shooterSubsys.stopMotors()), shooterSubsys)
     );
   }
 }
