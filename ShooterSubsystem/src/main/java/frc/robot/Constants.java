@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.net.FileNameMap;
+
 //CTRE Imports
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
@@ -278,7 +280,11 @@ public final class Constants {
         public static final int kFollowerMotorID = 23;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
-        public static final int kMotorCurrentLimit = 60;
+        public static final int kMotorCurrentLimit = 40;
+
+        public static final double kp = 0.0005;
+        public static final double kd = 0.0002;
+        public static final double ki = 0.0;
       }
 
       public static final class MotorShooterSmallWheelConstants {
@@ -288,7 +294,25 @@ public final class Constants {
         public static final int kMotorID = 22;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
-        public static final int kCurrentLimitMotor = 60;
+        public static final int kCurrentLimitMotor = 40;
+
+        public static final double kp = 0.0005;
+        public static final double kd = 0.0002;
+        public static final double ki = 0.0;
+      }
+
+      public static final class MotorShooterBaseConstants
+      {
+        public static final int kMotorId = 21;
+
+        public static final double kGearRatio = 1;
+
+        public static final IdleMode kIdleMode = IdleMode.kCoast;
+        public static final int kCurrentLimitMotor = 40;
+
+        public static final double kp = 0.0005;
+        public static final double kd = 0.0002;
+        public static final double ki = 0.0;
       }
     }
   }
