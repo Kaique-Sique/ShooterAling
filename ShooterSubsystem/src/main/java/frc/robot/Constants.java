@@ -7,6 +7,7 @@ package frc.robot;
 //CTRE Imports
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.pathplanner.lib.config.PIDConstants;
 //WPI Imports
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -71,7 +72,7 @@ public final class Constants {
     public static final double kITurning = 0;
     public static final double kDTurning = 2.529675;
 
-    public static final double kTurningFF = 0; 
+    public static final double kTurningFF = 0;
     public static final double kTurningKS = 0.3064;
     public static final double kTurningKV = 1.60;
     public static final double kTurningKA = 0.0;
@@ -89,8 +90,8 @@ public final class Constants {
     public static final double kDdriving = 0.0;
 
     public static final double driveKS = 0.15;
-    public static final double driveKV = 0.73; 
-    public static final double driveKA = 0.0; 
+    public static final double driveKV = 0.73;
+    public static final double driveKA = 0.0;
     public static final double kFFdriving = 1 / kDriveWheelFreeSpeedRps;
 
     public static final double kDrivingMinOutput = -1;
@@ -197,7 +198,7 @@ public final class Constants {
     public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 2.5;
     public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 2.5;
 
-    //limelights names string constants
+    // limelights names string constants
     public static final String limelightFront = "limelight-front";
     public static final String limelightBack = "limelight-back";
     public static final String limelightLeft = "limelight-left";
@@ -211,7 +212,7 @@ public final class Constants {
     public static final double kMaxAngularSpeedRadiansPerSecond = DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond
         / 2;
 
-    public static final double kMaxAccelerationMetersPerSecondSquared = 1.0; 
+    public static final double kMaxAccelerationMetersPerSecondSquared = 1.0;
     public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 2;
 
     public static final double kPXController = 10;
@@ -253,8 +254,8 @@ public final class Constants {
   // OI Constants
   public static final class OIConstants {
     public static final class JoystickDriverConstants {
-      //Joystick Driver ID port
-      public static final int kDriverControllerPort = 0; 
+      // Joystick Driver ID port
+      public static final int kDriverControllerPort = 0;
 
       public static final int kDriverYAxis = 1;
       public static final int kDriverXAxis = 0;
@@ -267,17 +268,28 @@ public final class Constants {
     public static final double kDeadband = 0.08;
   }
 
-  public static final class SubsystemConstants
-  {
-    public static final class shooterConstants
-    {
-      public static final double kGearRatioMotorBigWheel = 1.7;
-      public static final double kGearRatioMotorSmallWheel = 1.7;
+  public static final class SubsystemConstants {
+    public static final class shooterConstants {
+      public static final class MotorShooterBigWheelConstans {
+        public static final double kGearRatioMotor = 1.7;
+        public static final double kDiameterBigWheel = 4 * 2.54;
 
-      public static final double kDiameterBigWheel = 4 * 2.54;
-      public static final double kDiameterSmallWheel = 2 * 2.54; 
+        public static final int kShooterMotorID = 24;
+        public static final int kFollowerMotorID = 23;
 
-      public static final int kShooterBigWheelID = 24;
+        public static final IdleMode kIdleMode = IdleMode.kCoast;
+        public static final int kMotorCurrentLimit = 60;
+      }
+
+      public static final class MotorShooterSmallWheelConstants {
+        public static final double kGearRatio = 1.7;
+        public static final double kDiameterWheel = 2 * 2.54;
+
+        public static final int kMotorID = 22;
+
+        public static final IdleMode kIdleMode = IdleMode.kCoast;
+        public static final int kCurrentLimitMotor = 60;
+      }
     }
   }
 
