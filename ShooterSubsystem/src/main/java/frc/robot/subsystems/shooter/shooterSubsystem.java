@@ -15,14 +15,13 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-// wpi imports
+import frc.robot.utils.Conversions;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterBigWheelConstans;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterSmallWheelConstants;
-import frc.robot.Utils.Conversions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class shooterSubsystem extends SubsystemBase {
+public class ShooterSubsystem extends SubsystemBase {
   // MotorBig wheel motors configuration
   private final SparkMax MotorShooterBigWheel;
   private final SparkMax MotorFollowerBigWheel;
@@ -39,7 +38,7 @@ public class shooterSubsystem extends SubsystemBase {
   private final RelativeEncoder ShooterEncoderSmallWheel;
   private final SparkClosedLoopController shooterSmallWheelPID;
 
-  public shooterSubsystem() {
+  public ShooterSubsystem() {
     //Motors Instance 
     MotorShooterBigWheel = new SparkMax(MotorShooterBigWheelConstans.kShooterMotorID, MotorType.kBrushless);
     ShooterEncoderBigWheel = MotorShooterBigWheel.getEncoder();
@@ -159,6 +158,17 @@ public class shooterSubsystem extends SubsystemBase {
     shooterSmallWheelPID.setReference(rpsSmallWheel * 60, ControlType.kVelocity); 
   }
 
+  /**
+   * Stop all motors (brake)
+   */
+  public void stopMotors()
+  {
+    MotorFollowerBigWheel.set(0);
+    MotorShooterBigWheel.set(0);
+
+    MotorShooterSmallWheel.set(0);
+  }
+
   @Override
   public void periodic() 
   {
@@ -248,6 +258,7 @@ public class shooterSubsystem extends SubsystemBase {
   {
     return followerEncoderBigWheel.getVelocity();
   }
+
   /**
    * Get Motor Current
    * @return

@@ -7,8 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OIConstants.JoystickDriverConstants;
+import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 public class RobotContainer {
+  public static final ShooterSubsystem shooterSubsys = new ShooterSubsystem();
+
   private final CommandXboxController m_driverController =
       new CommandXboxController(JoystickDriverConstants.kDriverControllerPort);
 
