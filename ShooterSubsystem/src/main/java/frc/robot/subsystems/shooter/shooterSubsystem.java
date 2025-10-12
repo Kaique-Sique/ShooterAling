@@ -85,6 +85,8 @@ public class ShooterSubsystem extends SubsystemBase {
         .minOutput(-1);
 
     MotorShooterSmallWheel.configure(globalConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    ShooterEncoderSmallWheel.setPosition(0);
   }
 
   /**
@@ -121,6 +123,9 @@ public class ShooterSubsystem extends SubsystemBase {
     // Reset and persist parameters
     MotorShooterBigWheel.configure(globalConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     MotorFollowerBigWheel.configure(invertedConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    ShooterEncoderBigWheel.setPosition(0);
+    followerEncoderBigWheel.setPosition(0);
   }
 
   /**
@@ -266,5 +271,12 @@ public class ShooterSubsystem extends SubsystemBase {
   public double getFollowerMotorCurrent()
   {
     return MotorFollowerBigWheel.getOutputCurrent();
+  }
+
+  public void resetEncoders() {
+    ShooterEncoderBigWheel.setPosition(0);
+    followerEncoderBigWheel.setPosition(0);
+
+    ShooterEncoderSmallWheel.setPosition(0);
   }
 }
