@@ -182,19 +182,19 @@ public class ShooterSubsystem extends SubsystemBase {
     ////////////////////////////////////////////////
      
     /// Big Wheel Motor
-    SmartDashboard.putNumber("shooterMeasurements/BigWheel/kPosition", getBigWheelEncoderPose());
-    SmartDashboard.putNumber("shooterMeasurements/BigWheel/kVelocity", getBigWheelEncoderSpeed());
-    SmartDashboard.putNumber("shooterMeasurements/BigWheel/kCurrent", getBigWheelMotorCurrent());
+    SmartDashboard.putNumber("shooterMeasurements/BigWheelMotor/kPosition", getBigWheelEncoderPose());
+    SmartDashboard.putNumber("shooterMeasurements/BigWheelMotor/kVelocity", getBigWheelEncoderSpeed());
+    SmartDashboard.putNumber("shooterMeasurements/BigWheelMotor/kCurrent", getBigWheelMotorCurrent());
 
     //Small Wheel Motor
-    SmartDashboard.putNumber("shooterMeasurements/SmallWheel/kPosition", getBigWheelEncoderPose());
-    SmartDashboard.putNumber("shooterMeasurements/SmallWheel/kVelocity", getBigWheelEncoderSpeed());
-    SmartDashboard.putNumber("shooterMeasurements/SmallWheel/kCurrent", getSmallWheelMotorCurrent());
+    SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kPosition", getBigWheelEncoderPose());
+    SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kVelocity", getBigWheelEncoderSpeed());
+    SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kCurrent", getSmallWheelMotorCurrent());
 
     //Follower Motor
-    SmartDashboard.putNumber("shooterMeasurements/Follower/kPosition", getFollowerEncoderPose());
-    SmartDashboard.putNumber("shooterMeasurements/Follower/kVelocity", getFollowerEncoderSpeed());
-    SmartDashboard.putNumber("shooterMeasurements/Follower/kCurrent", getSmallWheelMotorCurrent());
+    SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kPosition", getFollowerEncoderPose());
+    SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kVelocity", getFollowerEncoderSpeed());
+    SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kCurrent", getSmallWheelMotorCurrent());
   }
 
   /**
