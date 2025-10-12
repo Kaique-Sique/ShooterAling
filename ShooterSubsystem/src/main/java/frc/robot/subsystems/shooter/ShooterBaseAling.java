@@ -25,11 +25,15 @@ public class ShooterBaseAling extends SubsystemBase {
   private final RelativeEncoder baseEncoder;
   private final SparkClosedLoopController basePIDController;
 
+  public boolean autoAling = true;
+
   public ShooterBaseAling() {
     motorBase = new SparkMax(MotorShooterBaseConstants.kMotorId, MotorType.kBrushless);
 
     baseEncoder = motorBase.getAlternateEncoder();
     basePIDController = motorBase.getClosedLoopController();
+
+    SmartDashboard.putNumber("shooterMeasurements/AlingMotor/targetPose", 0.0);
 
     initializeBaseMotor();
     resetEncoder();
@@ -120,5 +124,30 @@ public class ShooterBaseAling extends SubsystemBase {
   public void setOutput(double output)
   {
     motorBase.set(output);
+  }
+
+  /**
+   * Disable Shooter Base Auto Aling
+   */
+  public void disabledAutoAling()
+  {
+    autoAling = false;
+  }
+
+  /**
+   * Enable Shooter Base Auto Aling
+   */
+  public void enableAutoAling()
+  {
+    autoAling = true;
+  }
+
+  /**
+   * 
+   * @return Auto Aling isTrue
+   */
+  public Boolean isEnableAutoAling()
+  {
+      return autoAling;
   }
 }
