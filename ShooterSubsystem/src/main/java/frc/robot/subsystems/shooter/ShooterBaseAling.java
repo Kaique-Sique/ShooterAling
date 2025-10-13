@@ -61,6 +61,12 @@ public class ShooterBaseAling extends SubsystemBase {
       .maxOutput(1)
       .minOutput(-1);
 
+      glConfig.softLimit
+        .forwardSoftLimit(MotorShooterBaseConstants.kSoftLimitMax)
+        .forwardSoftLimitEnabled(true)
+        .reverseSoftLimit(MotorShooterBaseConstants.kSoftLimitMin)
+        .reverseSoftLimitEnabled(true);
+
     motorBase.configure(glConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 

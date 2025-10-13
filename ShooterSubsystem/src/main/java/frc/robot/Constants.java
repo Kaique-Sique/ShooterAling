@@ -311,6 +311,9 @@ public final class Constants {
         public static final double kp = 0.0005;
         public static final double kd = 0.0002;
         public static final double ki = 0.0;
+
+        public static final double kSoftLimitMax = 250;
+        public static final double kSoftLimitMin = -250;
       }
     }
   }
