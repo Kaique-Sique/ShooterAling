@@ -18,6 +18,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterBaseConstants;
+import frc.robot.Utils.OptimizeShooterPose;
 
 public class ShooterBaseAling extends SubsystemBase {
   private final SparkMax motorBase;
@@ -111,7 +112,11 @@ public class ShooterBaseAling extends SubsystemBase {
    */
   public void setPIDPosition(double targetPose)
   {
-    basePIDController.setReference(targetPose, ControlType.kPosition);
+    double correctPose = OptimizeShooterPose.softLimitOptimize(targetPose, 
+    MotorShooterBaseConstants.kSoftLimitMin, 
+    MotorShooterBaseConstants.kSoftLimitMax);
+    
+    basePIDController.setReference(correctPose, ControlType.kPosition);
   }
 
   /** 
