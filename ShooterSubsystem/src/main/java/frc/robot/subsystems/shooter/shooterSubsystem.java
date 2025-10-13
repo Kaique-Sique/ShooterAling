@@ -15,9 +15,9 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-import frc.robot.utils.Conversions;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterBigWheelConstans;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterSmallWheelConstants;
+import frc.robot.Utils.Conversions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
