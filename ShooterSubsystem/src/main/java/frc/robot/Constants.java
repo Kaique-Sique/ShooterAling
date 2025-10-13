@@ -15,6 +15,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import frc.robot.Utils.Conversions;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -272,7 +273,7 @@ public final class Constants {
     public static final class shooterConstants {
       public static final class MotorShooterBigWheelConstans {
         public static final double kGearRatioMotor = 1.7;
-        public static final double kDiameterBigWheel = 4 * 2.54;
+        public static final double kDiameterBigWheel = Units.inchesToMeters(4);
 
         public static final int kShooterMotorID = 24;
         public static final int kFollowerMotorID = 23;
@@ -287,7 +288,7 @@ public final class Constants {
 
       public static final class MotorShooterSmallWheelConstants {
         public static final double kGearRatio = 1.7;
-        public static final double kDiameterWheel = 2 * 2.54;
+        public static final double kDiameterWheel = Units.inchesToMeters(2);
 
         public static final int kMotorID = 22;
 
