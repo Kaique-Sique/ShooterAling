@@ -55,6 +55,11 @@ public class RobotContainer {
     manualAling.and(m_driverController.povLeft())
         .whileTrue(new RunCommand(()->baseShooter.setOutput(-0.1), baseShooter))
         .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
+
+    // Home position
+    manualAling.and(m_driverController.povDown())
+      .whileTrue(new RunCommand(()-> baseShooter.setPIDPosition(0), baseShooter))
+      .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
   }
 
   public Command getAutonomousCommand() 
