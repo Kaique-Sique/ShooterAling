@@ -4,7 +4,7 @@
 
 package frc.robot.Utils;
 
-public class OptimizeShooterPose {
+public class OptimizePose {
     public static double softLimitOptimize(double targetPose, double softLimitMin, double softLimitMax)
     {
         double correctPose = targetPose;
