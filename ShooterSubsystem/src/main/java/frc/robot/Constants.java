@@ -315,6 +315,21 @@ public final class Constants {
         public static final double kSoftLimitMax = 250;
         public static final double kSoftLimitMin = -250;
       }
+      public static final class motorCatcherConstants 
+      {
+        public static final int kMotorId = 21;
+
+        public static final double kGearRatio = 1/3;
+
+        public static final double kDiameterWheel = Units.inchesToMeters(4);
+
+        public static final IdleMode kIdleMode = IdleMode.kCoast;
+        public static final int kCurrentLimitMotor = 40;
+
+        public static final double kp = 0.0005;
+        public static final double kd = 0.0002;
+        public static final double ki = 0.0;
+      }
     }
   }
 

@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterBaseConstants;
 import frc.robot.Utils.OptimizePose;
 
-public class ShooterBaseAling extends SubsystemBase {
+public class ShooterBaseAlingSubsystem extends SubsystemBase {
   private final SparkMax motorBase;
 
   private final RelativeEncoder baseEncoder;
@@ -28,7 +28,7 @@ public class ShooterBaseAling extends SubsystemBase {
 
   public boolean autoAling = true;
 
-  public ShooterBaseAling() {
+  public ShooterBaseAlingSubsystem() {
     motorBase = new SparkMax(MotorShooterBaseConstants.kMotorId, MotorType.kBrushless);
 
     baseEncoder = motorBase.getAlternateEncoder();

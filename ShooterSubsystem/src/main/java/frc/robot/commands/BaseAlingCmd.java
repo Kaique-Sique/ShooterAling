@@ -7,11 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.shooter.ShooterBaseAling;
+import frc.robot.subsystems.shooter.ShooterBaseAlingSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class BaseAlingCmd extends Command {
-  private final ShooterBaseAling mBaseAling = RobotContainer.baseShooter;
+  private final ShooterBaseAlingSubsystem mBaseAling = RobotContainer.baseShooter;
 
   private double targetPose;
   private boolean finished;

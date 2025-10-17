@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants.JoystickDriverConstants;
 import frc.robot.commands.BaseAlingCmd;
 import frc.robot.commands.ShootBall;
-import frc.robot.subsystems.shooter.ShooterBaseAling;
+import frc.robot.subsystems.shooter.ShooterBaseAlingSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 public class RobotContainer {
   // Subsystens instance 
   public static final ShooterSubsystem shooterSubsys = new ShooterSubsystem();
-  public static final ShooterBaseAling baseShooter = new ShooterBaseAling();
+  public static final ShooterBaseAlingSubsystem baseShooter = new ShooterBaseAlingSubsystem();
 
   // Commands Instanc
   public static final BaseAlingCmd m_baseAling = new BaseAlingCmd();
