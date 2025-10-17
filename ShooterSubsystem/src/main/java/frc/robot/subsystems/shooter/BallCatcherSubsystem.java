@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.shooter;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
@@ -18,13 +18,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.motorCatcherConstants;
 import frc.robot.Utils.Conversions;
 
-public class ballCatcherSubsystem extends SubsystemBase {
+public class BallCatcherSubsystem extends SubsystemBase {
   private final SparkMax motorCatcher;
 
   private final RelativeEncoder encoderMotor;
   private final SparkClosedLoopController PIDControler;
 
-  public ballCatcherSubsystem() {
+  public BallCatcherSubsystem() {
     motorCatcher = new SparkMax(motorCatcherConstants.kMotorId, MotorType.kBrushless);
 
     encoderMotor = motorCatcher.getEncoder();
@@ -134,5 +134,13 @@ public class ballCatcherSubsystem extends SubsystemBase {
         motorCatcherConstants.kGearRatio);
 
     PIDControler.setReference(rps * 60, ControlType.kVelocity);
+  }
+
+  /**
+   * stop Motor catcher
+   */
+  public void stopMotor()
+  {
+    motorCatcher.set(0);
   }
 }

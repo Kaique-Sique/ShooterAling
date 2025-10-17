@@ -9,15 +9,19 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.shooter.BallCatcherSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
 public class ShootBall extends SequentialCommandGroup {
   private final ShooterSubsystem shooterSubsys = RobotContainer.shooterSubsys;
+  private final BallCatcherSubsystem ballCatcher = RobotContainer.ballCatcher;
   public ShootBall() {
-    addRequirements(shooterSubsys);
+    addRequirements(shooterSubsys, ballCatcher);
     addCommands(
-      new RunCommand((()-> shooterSubsys.setMPS(1)), shooterSubsys),
-      new WaitCommand(3),
+      new RunCommand(()-> shooterSubsys.setMPS(1), shooterSubsys),
+      new WaitCommand(0.3),
+      new RunCommand(()-> ballCatcher.setMPSTarget(1), ballCatcher),
+      new WaitCommand(2),
       new InstantCommand((()-> shooterSubsys.stopMotors()), shooterSubsys)
     );
   }

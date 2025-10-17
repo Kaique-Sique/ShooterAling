@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants.JoystickDriverConstants;
 import frc.robot.commands.BaseAlingCmd;
 import frc.robot.commands.ShootBall;
+import frc.robot.subsystems.shooter.BallCatcherSubsystem;
 import frc.robot.subsystems.shooter.ShooterBaseAlingSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
@@ -19,7 +20,7 @@ public class RobotContainer {
   // Subsystens instance 
   public static final ShooterSubsystem shooterSubsys = new ShooterSubsystem();
   public static final ShooterBaseAlingSubsystem baseShooter = new ShooterBaseAlingSubsystem();
-
+  public static final BallCatcherSubsystem ballCatcher = new BallCatcherSubsystem();
   // Commands Instanc
   public static final BaseAlingCmd m_baseAling = new BaseAlingCmd();
 
@@ -30,7 +31,7 @@ public class RobotContainer {
       new CommandXboxController(JoystickDriverConstants.kDriverControllerPort);
 
   public RobotContainer() {
-    m_shootBall.addRequirements(shooterSubsys);
+    m_shootBall.addRequirements(shooterSubsys, ballCatcher);
     m_baseAling.addRequirements(baseShooter);
     configureBindings();
   }
