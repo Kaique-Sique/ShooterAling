@@ -270,7 +270,8 @@ public final class Constants {
 
   public static final class SubsystemConstants {
     public static final class shooterConstants {
-      public static final class MotorShooterBigWheelConstans {
+
+      public static final class ShooterBigWheelConstans {
         public static final double kGearRatioMotor = 1.7;
         public static final double kDiameterBigWheel = Units.inchesToMeters(4);
 
@@ -285,7 +286,7 @@ public final class Constants {
         public static final double ki = 0.0;
       }
 
-      public static final class MotorShooterSmallWheelConstants {
+      public static final class ShooterSmallWheelConstants {
         public static final double kGearRatio = 1.7;
         public static final double kDiameterWheel = Units.inchesToMeters(2);
 
@@ -299,7 +300,7 @@ public final class Constants {
         public static final double ki = 0.0;
       }
 
-      public static final class MotorShooterBaseConstants
+      public static final class ShooterBaseConstants
       {
         public static final int kMotorId = 21;
 
@@ -315,7 +316,8 @@ public final class Constants {
         public static final double kSoftLimitMax = 250;
         public static final double kSoftLimitMin = -250;
       }
-      public static final class motorCatcherConstants 
+
+      public static final class CatcherConstants 
       {
         public static final int kMotorId = 21;
 
@@ -329,6 +331,26 @@ public final class Constants {
         public static final double kp = 0.0005;
         public static final double kd = 0.0002;
         public static final double ki = 0.0;
+      }
+
+      public static final class CapoConstants 
+      {
+        public static final int kMotorId = 21;
+
+        public static final double kGearRatio = 1;
+
+        public static final IdleMode kIdleMode = IdleMode.kBrake;
+        public static final int kCurrentLimitMotor = 40;
+
+        public static final double kp = 0.0005;
+        public static final double kd = 0.0002;
+        public static final double ki = 0.0;
+
+        public static final double kSoftLimitMax = 250;
+        public static final boolean kEnableSoftLimitMax = false;
+
+        public static final double kSoftLimitMin = 0;
+        public static final boolean kEnableSoftLimitMin = true;
       }
     }
   }

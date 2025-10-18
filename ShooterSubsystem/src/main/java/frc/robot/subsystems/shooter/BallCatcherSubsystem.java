@@ -15,7 +15,7 @@ import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.SubsystemConstants.shooterConstants.motorCatcherConstants;
+import frc.robot.Constants.SubsystemConstants.shooterConstants.CatcherConstants;
 import frc.robot.Utils.Conversions;
 
 public class BallCatcherSubsystem extends SubsystemBase {
@@ -25,7 +25,7 @@ public class BallCatcherSubsystem extends SubsystemBase {
   private final SparkClosedLoopController PIDControler;
 
   public BallCatcherSubsystem() {
-    motorCatcher = new SparkMax(motorCatcherConstants.kMotorId, MotorType.kBrushless);
+    motorCatcher = new SparkMax(CatcherConstants.kMotorId, MotorType.kBrushless);
 
     encoderMotor = motorCatcher.getEncoder();
     PIDControler = motorCatcher.getClosedLoopController();
@@ -42,20 +42,20 @@ public class BallCatcherSubsystem extends SubsystemBase {
 
     // Encoder setup
     gConfig.encoder
-        .velocityConversionFactor(motorCatcherConstants.kGearRatio)
-        .positionConversionFactor(motorCatcherConstants.kGearRatio);
+        .velocityConversionFactor(CatcherConstants.kGearRatio)
+        .positionConversionFactor(CatcherConstants.kGearRatio);
 
     // Motor config
     gConfig
-        .smartCurrentLimit(motorCatcherConstants.kCurrentLimitMotor)
-        .idleMode(motorCatcherConstants.kIdleMode)
+        .smartCurrentLimit(CatcherConstants.kCurrentLimitMotor)
+        .idleMode(CatcherConstants.kIdleMode)
         .inverted(false);
 
     // PID setup
     gConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-        .p(motorCatcherConstants.kp)
-        .i(motorCatcherConstants.ki)
-        .d(motorCatcherConstants.kd)
+        .p(CatcherConstants.kp)
+        .i(CatcherConstants.ki)
+        .d(CatcherConstants.kd)
         .velocityFF(0.0)
         .maxOutput(1)
         .minOutput(-1);
@@ -130,8 +130,8 @@ public class BallCatcherSubsystem extends SubsystemBase {
   {
     double rps;
     rps = Conversions.MPSToRPS(MPSspeed,
-        motorCatcherConstants.kDiameterWheel,
-        motorCatcherConstants.kGearRatio);
+        CatcherConstants.kDiameterWheel,
+        CatcherConstants.kGearRatio);
 
     PIDControler.setReference(rps * 60, ControlType.kVelocity);
   }

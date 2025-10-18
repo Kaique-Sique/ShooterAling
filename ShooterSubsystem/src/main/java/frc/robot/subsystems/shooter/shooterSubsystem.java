@@ -15,8 +15,8 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterBigWheelConstans;
-import frc.robot.Constants.SubsystemConstants.shooterConstants.MotorShooterSmallWheelConstants;
+import frc.robot.Constants.SubsystemConstants.shooterConstants.ShooterBigWheelConstans;
+import frc.robot.Constants.SubsystemConstants.shooterConstants.ShooterSmallWheelConstants;
 import frc.robot.Utils.Conversions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,15 +40,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public ShooterSubsystem() {
     // Motors Instance
-    MotorShooterBigWheel = new SparkMax(MotorShooterBigWheelConstans.kShooterMotorID, MotorType.kBrushless);
+    MotorShooterBigWheel = new SparkMax(ShooterBigWheelConstans.kShooterMotorID, MotorType.kBrushless);
     ShooterEncoderBigWheel = MotorShooterBigWheel.getEncoder();
     shooterBigWheelPID = MotorShooterBigWheel.getClosedLoopController();
 
-    MotorFollowerBigWheel = new SparkMax(MotorShooterBigWheelConstans.kFollowerMotorID, MotorType.kBrushless);
+    MotorFollowerBigWheel = new SparkMax(ShooterBigWheelConstans.kFollowerMotorID, MotorType.kBrushless);
     followerEncoderBigWheel = MotorFollowerBigWheel.getEncoder();
     followerBigWheelPID = MotorFollowerBigWheel.getClosedLoopController();
 
-    MotorShooterSmallWheel = new SparkMax(MotorShooterSmallWheelConstants.kMotorID, MotorType.kBrushless);
+    MotorShooterSmallWheel = new SparkMax(ShooterSmallWheelConstants.kMotorID, MotorType.kBrushless);
     ShooterEncoderSmallWheel = MotorShooterSmallWheel.getEncoder();
     shooterSmallWheelPID = MotorShooterSmallWheel.getClosedLoopController();
 
@@ -65,20 +65,20 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // Encoder setup
     globalConfig.encoder
-        .velocityConversionFactor(MotorShooterSmallWheelConstants.kGearRatio)
-        .positionConversionFactor(MotorShooterSmallWheelConstants.kGearRatio);
+        .velocityConversionFactor(ShooterSmallWheelConstants.kGearRatio)
+        .positionConversionFactor(ShooterSmallWheelConstants.kGearRatio);
 
     // Motor config
     globalConfig
-        .smartCurrentLimit(MotorShooterSmallWheelConstants.kCurrentLimitMotor)
-        .idleMode(MotorShooterSmallWheelConstants.kIdleMode)
+        .smartCurrentLimit(ShooterSmallWheelConstants.kCurrentLimitMotor)
+        .idleMode(ShooterSmallWheelConstants.kIdleMode)
         .inverted(false);
 
     // PID setup
     globalConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-        .p(MotorShooterSmallWheelConstants.kp)
-        .i(MotorShooterSmallWheelConstants.ki)
-        .d(MotorShooterSmallWheelConstants.kd)
+        .p(ShooterSmallWheelConstants.kp)
+        .i(ShooterSmallWheelConstants.ki)
+        .d(ShooterSmallWheelConstants.kd)
         .velocityFF(0.0)
         .maxOutput(1)
         .minOutput(-1);
@@ -97,20 +97,20 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // Encoder setup
     globalConfig.encoder
-        .velocityConversionFactor(MotorShooterBigWheelConstans.kGearRatioMotor)
-        .positionConversionFactor(MotorShooterBigWheelConstans.kGearRatioMotor);
+        .velocityConversionFactor(ShooterBigWheelConstans.kGearRatioMotor)
+        .positionConversionFactor(ShooterBigWheelConstans.kGearRatioMotor);
 
     // Motor config
     globalConfig
-        .smartCurrentLimit(MotorShooterBigWheelConstans.kMotorCurrentLimit)
-        .idleMode(MotorShooterBigWheelConstans.kIdleMode)
+        .smartCurrentLimit(ShooterBigWheelConstans.kMotorCurrentLimit)
+        .idleMode(ShooterBigWheelConstans.kIdleMode)
         .inverted(false);
 
     // PID setup
     globalConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-        .p(MotorShooterBigWheelConstans.kp)
-        .i(MotorShooterBigWheelConstans.ki)
-        .d(MotorShooterBigWheelConstans.kd)
+        .p(ShooterBigWheelConstans.kp)
+        .i(ShooterBigWheelConstans.ki)
+        .d(ShooterBigWheelConstans.kd)
         .velocityFF(0.0)
         .maxOutput(1)
         .minOutput(-1);
@@ -148,12 +148,12 @@ public class ShooterSubsystem extends SubsystemBase {
     double rpsBigWheel;
 
     rpsSmallWheel = Conversions.MPSToRPS(mps,
-        MotorShooterSmallWheelConstants.kDiameterWheel,
-        MotorShooterSmallWheelConstants.kGearRatio);
+        ShooterSmallWheelConstants.kDiameterWheel,
+        ShooterSmallWheelConstants.kGearRatio);
 
     rpsBigWheel = Conversions.MPSToRPS(mps,
-        MotorShooterBigWheelConstans.kDiameterBigWheel,
-        MotorShooterBigWheelConstans.kGearRatioMotor);
+        ShooterBigWheelConstans.kDiameterBigWheel,
+        ShooterBigWheelConstans.kGearRatioMotor);
 
     shooterBigWheelPID.setReference(rpsBigWheel * 60, ControlType.kVelocity);
     followerBigWheelPID.setReference(rpsBigWheel * 60, ControlType.kVelocity);
