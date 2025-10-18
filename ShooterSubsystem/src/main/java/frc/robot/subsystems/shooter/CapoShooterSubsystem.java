@@ -31,6 +31,8 @@ public class CapoShooterSubsystem extends SubsystemBase {
 
     intializeMotor();
     resetEncoder();
+
+    SmartDashboard.putNumber("shooterMeasurements/CapoMotor/targetPose", 0.0);
   }
 
   private void resetEncoder() {

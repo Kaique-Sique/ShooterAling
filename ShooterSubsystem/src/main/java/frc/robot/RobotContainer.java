@@ -6,13 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants.JoystickDriverConstants;
-import frc.robot.commands.BaseAlingCmd;
-import frc.robot.commands.ShootBall;
+import frc.robot.commands.shooterCmds.BaseAlingCmd;
+import frc.robot.commands.shooterCmds.ShootBall;
 import frc.robot.subsystems.shooter.BallCatcherSubsystem;
+import frc.robot.subsystems.shooter.CapoShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterBaseAlingSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
@@ -21,6 +21,8 @@ public class RobotContainer {
   public static final ShooterSubsystem shooterSubsys = new ShooterSubsystem();
   public static final ShooterBaseAlingSubsystem baseShooter = new ShooterBaseAlingSubsystem();
   public static final BallCatcherSubsystem ballCatcher = new BallCatcherSubsystem();
+  public static final CapoShooterSubsystem capoShooter = new CapoShooterSubsystem();
+
   // Commands Instanc
   public static final BaseAlingCmd m_baseAling = new BaseAlingCmd();
 
@@ -47,20 +49,6 @@ public class RobotContainer {
     Trigger autoAling = new Trigger(()-> (baseShooter.isEnableAutoAling()));
     autoAling.whileTrue(m_baseAling);
     autoAling.onFalse(new InstantCommand(()->baseShooter.stopMotor(), baseShooter));
-
-    //Manual aling Enable, auto aling disable
-    Trigger manualAling = new Trigger(()-> (!baseShooter.isEnableAutoAling()));
-    manualAling.and(m_driverController.povRight())
-        .whileTrue(new RunCommand(()->baseShooter.setOutput(0.1), baseShooter))
-        .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
-    manualAling.and(m_driverController.povLeft())
-        .whileTrue(new RunCommand(()->baseShooter.setOutput(-0.1), baseShooter))
-        .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
-
-    // Home position
-    manualAling.and(m_driverController.povDown())
-      .whileTrue(new RunCommand(()-> baseShooter.setPIDPosition(0), baseShooter))
-      .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
   }
 
   public Command getAutonomousCommand() 

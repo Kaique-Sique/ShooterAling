@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.shooterCmds;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,16 +14,13 @@ public class BaseAlingCmd extends Command {
   private final ShooterBaseAlingSubsystem mBaseAling = RobotContainer.baseShooter;
 
   private double targetPose;
-  private boolean finished;
   public BaseAlingCmd() {
-    finished = false;
     addRequirements(mBaseAling);
   }
 
   @Override
   public void initialize() 
   {
-    finished = false;
     targetPose = SmartDashboard.getNumber("shooterMeasurements/AlingMotor/targetPose", 0.0);
   }
 
@@ -31,12 +28,8 @@ public class BaseAlingCmd extends Command {
   @Override
   public void execute() 
   {
+    targetPose = SmartDashboard.getNumber("shooterMeasurements/AlingMotor/targetPose", 0.0);
     mBaseAling.setPIDPosition(targetPose);
-    if(mBaseAling.getEncoderValue() + 0.1 >= targetPose && 
-            mBaseAling.getEncoderValue() - 0.1 <= targetPose)
-    {
-      finished = true;
-    }
   }
 
   @Override
@@ -47,6 +40,6 @@ public class BaseAlingCmd extends Command {
 
   @Override
   public boolean isFinished() {
-    return finished;
+    return false;
   }
 }

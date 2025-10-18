@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.shooterCmds;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -18,11 +18,14 @@ public class ShootBall extends SequentialCommandGroup {
   public ShootBall() {
     addRequirements(shooterSubsys, ballCatcher);
     addCommands(
+      new CapoAlingCmd(),
+      new WaitCommand(0.3),
       new RunCommand(()-> shooterSubsys.setMPS(1), shooterSubsys),
       new WaitCommand(0.3),
-      new RunCommand(()-> ballCatcher.setMPSTarget(1), ballCatcher),
-      new WaitCommand(2),
-      new InstantCommand((()-> shooterSubsys.stopMotors()), shooterSubsys)
+      new RunCommand(()-> ballCatcher.setMPSTarget(2), ballCatcher),
+      new WaitCommand(1),
+      new InstantCommand((()-> shooterSubsys.stopMotors()), shooterSubsys), 
+      new InstantCommand(()-> ballCatcher.stopMotor(), ballCatcher)
     );
   }
 }
