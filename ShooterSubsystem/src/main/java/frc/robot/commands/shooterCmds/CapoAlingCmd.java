@@ -17,9 +17,13 @@ public class CapoAlingCmd extends Command {
   boolean finished = false;
 
   public CapoAlingCmd() {
+    //get subsystem requirements
     addRequirements(capoSubsystem);
 
+    //get target pose
     targetPose = SmartDashboard.getNumber("shooterMeasurements/CapoMotor/targetPose", 0.0);
+
+    //set finish to zero
     finished = false;
   }
 
@@ -28,6 +32,8 @@ public class CapoAlingCmd extends Command {
   public void initialize() 
   {
     finished = false;
+
+    //capo subsystem pid pose
     capoSubsystem.setTargetPosePID(targetPose);
   }
 
@@ -37,6 +43,7 @@ public class CapoAlingCmd extends Command {
   {
     capoSubsystem.setTargetPosePID(targetPose);
 
+    // if capo is in position, finish command
     if (capoSubsystem.getEncoderValue() + 0.1 >= targetPose && 
     capoSubsystem.getEncoderValue() - 0.1 <= targetPose) 
     {
@@ -48,12 +55,14 @@ public class CapoAlingCmd extends Command {
   @Override
   public void end(boolean interrupted) 
   {
+    //continue holding the motor on position
     capoSubsystem.setTargetPosePID(targetPose);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    //call end when finished = true
+    return finished;
   }
 }

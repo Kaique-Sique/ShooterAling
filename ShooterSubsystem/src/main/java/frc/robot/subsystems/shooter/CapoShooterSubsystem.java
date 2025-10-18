@@ -18,9 +18,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.CapoConstants;
 
 public class CapoShooterSubsystem extends SubsystemBase {
+  //Motor instance
   private final SparkMax capoMotor;
 
+  //encoder instance
   private final RelativeEncoder mEncoder;
+  //PID instance
   private final SparkClosedLoopController mController;
 
   public CapoShooterSubsystem() {
@@ -29,16 +32,26 @@ public class CapoShooterSubsystem extends SubsystemBase {
     mEncoder = capoMotor.getEncoder();
     mController = capoMotor.getClosedLoopController();
 
+    //initialize Motor config
     intializeMotor();
+    //reset encoder
     resetEncoder();
 
+    //create a NT to target position
+    //it will be use on a position Command
     SmartDashboard.putNumber("shooterMeasurements/CapoMotor/targetPose", 0.0);
   }
 
+  /**
+   * set encoder to zero degress
+   */
   private void resetEncoder() {
     mEncoder.setPosition(0);
   }
 
+  /** 
+   * initialize motor config
+   */
   private void intializeMotor() {
     SparkMaxConfig glConfig = new SparkMaxConfig();
 
@@ -76,19 +89,35 @@ public class CapoShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("shooterMeasurements/CapoMotor/kCurrent", getMotorCurrent());
   }
 
+  /**
+   * get Motor current
+   * @return output Current
+   */
   private double getMotorCurrent() {
     return capoMotor.getOutputCurrent();
   }
 
+  /**
+   * get encoder value
+   * @return value from degrees
+   */
   public double getEncoderValue() {
     return mEncoder.getPosition();
   }
 
+  /**
+   * set a pid pose target
+   * @param pose pose target from degress
+   */
   public void setTargetPosePID(double pose)
   {
     mController.setReference(pose, ControlType.kPosition);
   }
 
+  /** 
+   * stop Motors
+   * set output to zero
+   */
   public void stopMotors()
   {
     capoMotor.set(0);
