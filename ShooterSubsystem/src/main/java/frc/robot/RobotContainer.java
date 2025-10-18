@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants.JoystickDriverConstants;
@@ -40,8 +41,10 @@ public class RobotContainer {
 
   private void configureBindings() 
   {
+    //shootBall
     m_driverController.a().onTrue(m_shootBall);
 
+    //enable and disable auto aling
     m_driverController.leftBumper().onTrue(new InstantCommand(()-> baseShooter.disabledAutoAling()));
     m_driverController.rightBumper().onTrue(new InstantCommand(()-> baseShooter.enableAutoAling()));
 
@@ -49,6 +52,20 @@ public class RobotContainer {
     Trigger autoAling = new Trigger(()-> (baseShooter.isEnableAutoAling()));
     autoAling.whileTrue(m_baseAling);
     autoAling.onFalse(new InstantCommand(()->baseShooter.stopMotor(), baseShooter));
+
+    //Manual aling Enable, auto aling disable
+    Trigger manualAling = new Trigger(()-> (!baseShooter.isEnableAutoAling()));
+    manualAling.and(m_driverController.povRight())
+        .whileTrue(new RunCommand(()->baseShooter.setOutput(0.1), baseShooter))
+        .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
+    manualAling.and(m_driverController.povLeft())
+        .whileTrue(new RunCommand(()->baseShooter.setOutput(-0.1), baseShooter))
+        .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
+
+    // Home position
+    manualAling.and(m_driverController.povDown())
+      .whileTrue(new RunCommand(()-> baseShooter.setPIDPosition(0), baseShooter))
+      .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
   }
 
   public Command getAutonomousCommand() 
