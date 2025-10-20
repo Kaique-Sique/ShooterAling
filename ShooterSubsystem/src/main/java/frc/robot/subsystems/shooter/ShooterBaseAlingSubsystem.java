@@ -18,7 +18,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.ShooterBaseConstants;
-import frc.robot.Utils.OptimizePose;
+import frc.robot.utils.OptimizePose;
 
 public class ShooterBaseAlingSubsystem extends SubsystemBase {
   private final SparkMax motorBase;
@@ -31,7 +31,7 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
   public ShooterBaseAlingSubsystem() {
     motorBase = new SparkMax(ShooterBaseConstants.kMotorId, MotorType.kBrushless);
 
-    baseEncoder = motorBase.getAlternateEncoder();
+    baseEncoder = motorBase.getEncoder();
     basePIDController = motorBase.getClosedLoopController();
 
     SmartDashboard.putNumber("shooterMeasurements/AlingMotor/targetPose", 0.0);
@@ -45,8 +45,8 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
     SparkMaxConfig glConfig = new SparkMaxConfig();
 
     glConfig.encoder
-      .velocityConversionFactor(ShooterBaseConstants.kGearRatio)
-      .positionConversionFactor(ShooterBaseConstants.kGearRatio);
+      .velocityConversionFactor(1)
+      .positionConversionFactor(360 / ShooterBaseConstants.kGearRatio);
 
     glConfig
       .smartCurrentLimit(ShooterBaseConstants.kCurrentLimitMotor)
@@ -143,6 +143,10 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
   public void disabledAutoAling()
   {
     autoAling = false;
+    for(int x = 0; x < 3; x++)
+    {
+      System.out.println("Manual aling enable!!");
+    }
   }
 
   /**

@@ -17,14 +17,14 @@ public class ShootBall extends SequentialCommandGroup {
   private final BallCatcherSubsystem ballCatcher = RobotContainer.ballCatcher;
   public ShootBall() {
     addRequirements(shooterSubsys, ballCatcher);
+    addRequirements(shooterSubsys);
     addCommands(
-      new CapoAlingCmd(),
       new WaitCommand(0.3),
-      new RunCommand(()-> shooterSubsys.setMPS(1), shooterSubsys),
-      new WaitCommand(0.3),
-      new RunCommand(()-> ballCatcher.setMPSTarget(2), ballCatcher),
+      new RunCommand(()-> shooterSubsys.setMPS(580), shooterSubsys),
       new WaitCommand(1),
-      new InstantCommand((()-> shooterSubsys.stopMotors()), shooterSubsys), 
+      new RunCommand(()-> ballCatcher.setMPSTarget(5600), ballCatcher),
+      new WaitCommand(2),
+      new InstantCommand((()-> shooterSubsys.stopMotors()), shooterSubsys),
       new InstantCommand(()-> ballCatcher.stopMotor(), ballCatcher)
     );
   }

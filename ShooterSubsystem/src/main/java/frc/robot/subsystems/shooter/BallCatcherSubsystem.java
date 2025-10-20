@@ -16,7 +16,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants.shooterConstants.CatcherConstants;
-import frc.robot.Utils.Conversions;
+import frc.robot.utils.Conversions;
 
 public class BallCatcherSubsystem extends SubsystemBase {
   private final SparkMax motorCatcher;
@@ -42,7 +42,7 @@ public class BallCatcherSubsystem extends SubsystemBase {
 
     // Encoder setup
     gConfig.encoder
-        .velocityConversionFactor(CatcherConstants.kGearRatio)
+        .velocityConversionFactor(2* Math.PI / 60)
         .positionConversionFactor(CatcherConstants.kGearRatio);
 
     // Motor config
@@ -56,7 +56,7 @@ public class BallCatcherSubsystem extends SubsystemBase {
         .p(CatcherConstants.kp)
         .i(CatcherConstants.ki)
         .d(CatcherConstants.kd)
-        .velocityFF(0.0)
+        .velocityFF(1 / 473)
         .maxOutput(1)
         .minOutput(-1);
 
@@ -133,7 +133,7 @@ public class BallCatcherSubsystem extends SubsystemBase {
         CatcherConstants.kDiameterWheel,
         CatcherConstants.kGearRatio);
 
-    PIDControler.setReference(rps * 60, ControlType.kVelocity);
+    PIDControler.setReference(MPSspeed, ControlType.kVelocity);
   }
 
   /**

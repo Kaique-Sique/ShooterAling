@@ -35,20 +35,23 @@ public class CapoAlingCmd extends Command {
 
     //capo subsystem pid pose
     capoSubsystem.setTargetPosePID(targetPose);
+    System.out.println("command initialized");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
-    capoSubsystem.setTargetPosePID(targetPose);
+    //capoSubsystem.setTargetPosePID(targetPose);
 
-    // if capo is in position, finish command
-    if (capoSubsystem.getEncoderValue() + 0.1 >= targetPose && 
-    capoSubsystem.getEncoderValue() - 0.1 <= targetPose) 
+    //if capo is in position, finish command
+    capoSubsystem.setTargetPosePID(targetPose);
+    if (capoSubsystem.getEncoderValue() - 0.1 <= targetPose && 
+    capoSubsystem.getEncoderValue() + 0.1 >= targetPose) 
     {
       finished = true;
     }
+    System.out.println("finish:" + finished);
   }
 
   // Called once the command ends or is interrupted.

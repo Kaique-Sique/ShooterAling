@@ -12,6 +12,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,7 +28,7 @@ public class CapoShooterSubsystem extends SubsystemBase {
   private final SparkClosedLoopController mController;
 
   public CapoShooterSubsystem() {
-    capoMotor = new SparkMax(0, null);
+    capoMotor = new SparkMax(CapoConstants.kMotorId, MotorType.kBrushless);
 
     mEncoder = capoMotor.getEncoder();
     mController = capoMotor.getClosedLoopController();
@@ -56,13 +57,13 @@ public class CapoShooterSubsystem extends SubsystemBase {
     SparkMaxConfig glConfig = new SparkMaxConfig();
 
     glConfig.encoder
-      .velocityConversionFactor(CapoConstants.kGearRatio)
+      .velocityConversionFactor(1)
       .positionConversionFactor(CapoConstants.kGearRatio);
 
     glConfig
       .smartCurrentLimit(CapoConstants.kCurrentLimitMotor)
       .idleMode(CapoConstants.kIdleMode)
-      .inverted(false);
+      .inverted(true);
 
     // PID setup
     glConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)

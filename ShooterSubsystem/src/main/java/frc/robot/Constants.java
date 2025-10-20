@@ -275,14 +275,14 @@ public final class Constants {
         public static final double kGearRatioMotor = 1.7;
         public static final double kDiameterBigWheel = Units.inchesToMeters(4);
 
-        public static final int kShooterMotorID = 24;
-        public static final int kFollowerMotorID = 23;
+        public static final int kShooterMotorID = 33;
+        public static final int kFollowerMotorID = 34;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
         public static final int kMotorCurrentLimit = 40;
 
-        public static final double kp = 0.0005;
-        public static final double kd = 0.0002;
+        public static final double kp = 0.0001;
+        public static final double kd = 0.00001;
         public static final double ki = 0.0;
       }
 
@@ -290,7 +290,7 @@ public final class Constants {
         public static final double kGearRatio = 1.7;
         public static final double kDiameterWheel = Units.inchesToMeters(2);
 
-        public static final int kMotorID = 22;
+        public static final int kMotorID = 32;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
         public static final int kCurrentLimitMotor = 40;
@@ -302,42 +302,42 @@ public final class Constants {
 
       public static final class ShooterBaseConstants
       {
-        public static final int kMotorId = 21;
+        public static final int kMotorId = 35;
 
-        public static final double kGearRatio = 1;
+        public static final double kGearRatio = 15 * 6.875;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
         public static final int kCurrentLimitMotor = 40;
 
-        public static final double kp = 0.0005;
-        public static final double kd = 0.0002;
+        public static final double kp = 0.009;
+        public static final double kd = 0.002;
         public static final double ki = 0.0;
 
-        public static final double kSoftLimitMax = 250;
-        public static final double kSoftLimitMin = -250;
+        public static final double kSoftLimitMax = 50;
+        public static final double kSoftLimitMin = -50;
       }
 
       public static final class CatcherConstants 
       {
-        public static final int kMotorId = 21;
+        public static final int kMotorId = 31;
 
-        public static final double kGearRatio = 1/3;
+        public static final double kGearRatio = 3;
 
         public static final double kDiameterWheel = Units.inchesToMeters(4);
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
         public static final int kCurrentLimitMotor = 40;
 
-        public static final double kp = 0.0005;
-        public static final double kd = 0.0002;
+        public static final double kp = 0.0003;
+        public static final double kd = 0.000;
         public static final double ki = 0.0;
       }
 
       public static final class CapoConstants 
       {
-        public static final int kMotorId = 21;
+        public static final int kMotorId = 36;
 
-        public static final double kGearRatio = 1;
+        public static final double kGearRatio = 15;
 
         public static final IdleMode kIdleMode = IdleMode.kBrake;
         public static final int kCurrentLimitMotor = 40;
