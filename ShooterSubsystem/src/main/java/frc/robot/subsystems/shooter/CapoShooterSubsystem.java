@@ -8,7 +8,10 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
+import com.revrobotics.spark.config.MAXMotionConfig;
+import com.revrobotics.spark.config.MAXMotionConfig.MAXMotionPositionMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -79,6 +82,16 @@ public class CapoShooterSubsystem extends SubsystemBase {
         .forwardSoftLimitEnabled(CapoConstants.kEnableSoftLimitMax)
         .reverseSoftLimit(CapoConstants.kSoftLimitMin)
         .reverseSoftLimitEnabled(CapoConstants.kEnableSoftLimitMin);
+
+    MAXMotionConfig maxMotion = glConfig.closedLoop.maxMotion;
+
+    maxMotion
+        .positionMode(MAXMotionPositionMode.kMAXMotionTrapezoidal, ClosedLoopSlot.kSlot0)
+        .maxAcceleration(34200 * 2, ClosedLoopSlot.kSlot0)
+        .maxVelocity(34200, ClosedLoopSlot.kSlot0)
+
+        .allowedClosedLoopError(0.85, ClosedLoopSlot.kSlot0);
+
 
     capoMotor.configure(glConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }

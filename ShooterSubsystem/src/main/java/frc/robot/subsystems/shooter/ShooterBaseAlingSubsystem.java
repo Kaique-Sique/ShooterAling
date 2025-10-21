@@ -26,7 +26,7 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
   private final RelativeEncoder baseEncoder;
   private final SparkClosedLoopController basePIDController;
 
-  public boolean autoAling = true;
+  public boolean autoAling = false;
 
   public ShooterBaseAlingSubsystem() {
     motorBase = new SparkMax(ShooterBaseConstants.kMotorId, MotorType.kBrushless);

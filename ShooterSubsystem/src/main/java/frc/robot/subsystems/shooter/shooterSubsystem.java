@@ -102,7 +102,7 @@ public class ShooterSubsystem extends SubsystemBase {
     globalConfig
         .smartCurrentLimit(ShooterBigWheelConstans.kMotorCurrentLimit)
         .idleMode(ShooterBigWheelConstans.kIdleMode)
-        .inverted(true);
+        .inverted(false);
 
     // PID setup
     globalConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -116,7 +116,7 @@ public class ShooterSubsystem extends SubsystemBase {
     invertedConfig
         .apply(globalConfig)
         .follow(MotorShooterBigWheel)
-        .inverted(false);
+        .inverted(true);
         
     // Reset and persist parameters
     MotorShooterBigWheel.configure(globalConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -153,7 +153,7 @@ public class ShooterSubsystem extends SubsystemBase {
         ShooterBigWheelConstans.kDiameterBigWheel,
         ShooterBigWheelConstans.kGearRatioMotor);
 
-    //shooterBigWheelPID.setReference(mps / 1.7 / 2, ControlType.kVelocity);
+    shooterBigWheelPID.setReference(mps / 1.7, ControlType.kVelocity);
     shooterSmallWheelPID.setReference(mps / 1.7, ControlType.kVelocity);
   }
 

@@ -275,11 +275,11 @@ public final class Constants {
         public static final double kGearRatioMotor = 1.7;
         public static final double kDiameterBigWheel = Units.inchesToMeters(4);
 
-        public static final int kShooterMotorID = 33;
-        public static final int kFollowerMotorID = 34;
+        public static final int kShooterMotorID = 34;
+        public static final int kFollowerMotorID = 33;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
-        public static final int kMotorCurrentLimit = 40;
+        public static final int kMotorCurrentLimit = 80;
 
         public static final double kp = 0.0001;
         public static final double kd = 0.00001;
@@ -293,7 +293,7 @@ public final class Constants {
         public static final int kMotorID = 32;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
-        public static final int kCurrentLimitMotor = 40;
+        public static final int kCurrentLimitMotor = 80;
 
         public static final double kp = 0.0005;
         public static final double kd = 0.0002;
@@ -326,7 +326,7 @@ public final class Constants {
         public static final double kDiameterWheel = Units.inchesToMeters(4);
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
-        public static final int kCurrentLimitMotor = 40;
+        public static final int kCurrentLimitMotor = 80;
 
         public static final double kp = 0.0003;
         public static final double kd = 0.000;
@@ -342,12 +342,12 @@ public final class Constants {
         public static final IdleMode kIdleMode = IdleMode.kBrake;
         public static final int kCurrentLimitMotor = 40;
 
-        public static final double kp = 0.0005;
-        public static final double kd = 0.0002;
-        public static final double ki = 0.0;
+        public static final double kp = 0.009;
+        public static final double kd = 0.00;
+        public static final double ki = 0.000001;
 
-        public static final double kSoftLimitMax = 250;
-        public static final boolean kEnableSoftLimitMax = false;
+        public static final double kSoftLimitMax = 120;
+        public static final boolean kEnableSoftLimitMax = true;
 
         public static final double kSoftLimitMin = 0;
         public static final boolean kEnableSoftLimitMin = true;

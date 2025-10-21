@@ -141,6 +141,6 @@ public class BallCatcherSubsystem extends SubsystemBase {
    */
   public void stopMotor()
   {
-    motorCatcher.set(0);
+    PIDControler.setReference(0, ControlType.kVelocity);
   }
 }

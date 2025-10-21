@@ -32,7 +32,7 @@ public class CapoAlingCmd extends Command {
   public void initialize() 
   {
     finished = false;
-
+    targetPose = SmartDashboard.getNumber("shooterMeasurements/CapoMotor/targetPose", 0.0);
     //capo subsystem pid pose
     capoSubsystem.setTargetPosePID(targetPose);
     System.out.println("command initialized");
@@ -46,8 +46,8 @@ public class CapoAlingCmd extends Command {
 
     //if capo is in position, finish command
     capoSubsystem.setTargetPosePID(targetPose);
-    if (capoSubsystem.getEncoderValue() - 0.1 <= targetPose && 
-    capoSubsystem.getEncoderValue() + 0.1 >= targetPose) 
+    if (capoSubsystem.getEncoderValue() + 0.35 >= targetPose && 
+    capoSubsystem.getEncoderValue() - 0.35 <= targetPose) 
     {
       finished = true;
     }
