@@ -41,29 +41,23 @@ public class RobotContainer {
     //shootBall
     m_driverController.a().onTrue(new CapoAlingCmd());
     m_driverController.x().onTrue(new Shoot());
+    m_driverController.y().whileTrue(new RunCommand(()-> ballCatcher.setSpeedTarget(5600), ballCatcher))
+        .onFalse(new InstantCommand(()-> ballCatcher.stopMotor(), ballCatcher));
+    
+    m_driverController.b().whileTrue(new RunCommand(()-> shooterSubsys.setMPS(580), shooterSubsys))
+        .onFalse(new InstantCommand(()-> shooterSubsys.stopMotors(), shooterSubsys));
 
-    //enable and disable auto aling
-    m_driverController.leftBumper().onTrue(new InstantCommand(()-> baseShooter.disabledAutoAling()));
-    m_driverController.rightBumper().onTrue(new InstantCommand(()-> baseShooter.enableAutoAling()));
-
-    //Auto aling Enable
-    Trigger autoAling = new Trigger(()-> (baseShooter.isEnableAutoAling()));
-    autoAling.whileTrue(m_baseAling);
-    autoAling.onFalse(new InstantCommand(()->baseShooter.stopMotor(), baseShooter));
-
-    //Manual aling Enable, auto aling disable
-    Trigger manualAling = new Trigger(()-> (!baseShooter.isEnableAutoAling()));
-    manualAling.and(m_driverController.povRight())
+    // Manual Aling
+    m_driverController.povRight()
         .whileTrue(new RunCommand(()->baseShooter.setOutput(0.1), baseShooter))
         .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
-    manualAling.and(m_driverController.povLeft())
+        m_driverController.povLeft()
         .whileTrue(new RunCommand(()->baseShooter.setOutput(-0.1), baseShooter))
         .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
 
-    manualAling.whileFalse(m_baseAling);
 
     // Home position
-    manualAling.and(m_driverController.povDown())
+    m_driverController.povDown()
       .whileTrue(new RunCommand(()-> baseShooter.setPIDPosition(0), baseShooter))
       .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
   }

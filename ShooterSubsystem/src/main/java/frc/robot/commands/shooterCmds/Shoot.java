@@ -22,6 +22,7 @@ public class Shoot extends SequentialCommandGroup {
   public Shoot() {
     
     addCommands(
+        new CapoAlingCmd(),
         new RunCommand(()-> shooterSubsys.setMPS(580), shooterSubsys).withTimeout(1),
         new RunCommand(()-> ballCatcher.setMPSTarget(5600), ballCatcher).withTimeout(0.8)
         .andThen(new InstantCommand(()-> ballCatcher.stopMotor(), ballCatcher)),
