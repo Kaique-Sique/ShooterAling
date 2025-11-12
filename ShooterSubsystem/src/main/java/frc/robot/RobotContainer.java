@@ -8,11 +8,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.OIConstants.JoystickDriverConstants;
 import frc.robot.commands.shooterCmds.BaseAlingCmd;
 import frc.robot.commands.shooterCmds.CapoAlingCmd;
-import frc.robot.commands.shooterCmds.Shoot;
+import frc.robot.commands.shooterCmds.ShootCmd;
 import frc.robot.subsystems.shooter.BallCatcherSubsystem;
 import frc.robot.subsystems.shooter.CapoShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterBaseAlingSubsystem;
@@ -38,26 +36,27 @@ public class RobotContainer {
 
   private void configureBindings() 
   {
-    //shootBall
+    /******* Shooter Commands *******/
+    // Capo Aling to dashboard target pose
     m_driverController.a().onTrue(new CapoAlingCmd());
-    m_driverController.x().onTrue(new Shoot());
+    m_driverController.x().onTrue(new ShootCmd());
     m_driverController.y().whileTrue(new RunCommand(()-> ballCatcher.setSpeedTarget(5600), ballCatcher))
         .onFalse(new InstantCommand(()-> ballCatcher.stopMotor(), ballCatcher));
     
-    m_driverController.b().whileTrue(new RunCommand(()-> shooterSubsys.setMPS(580), shooterSubsys))
+    m_driverController.b().whileTrue(new RunCommand(()-> shooterSubsys.setOutput(0.20), shooterSubsys))
         .onFalse(new InstantCommand(()-> shooterSubsys.stopMotors(), shooterSubsys));
 
     // Manual Aling
-    m_driverController.povRight()
+    m_driverController.povUp()
         .whileTrue(new RunCommand(()->baseShooter.setOutput(0.1), baseShooter))
         .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
-        m_driverController.povLeft()
+        m_driverController.povDown()
         .whileTrue(new RunCommand(()->baseShooter.setOutput(-0.1), baseShooter))
         .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
 
 
     // Home position
-    m_driverController.povDown()
+    m_driverController.povRight()
       .whileTrue(new RunCommand(()-> baseShooter.setPIDPosition(0), baseShooter))
       .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
   }

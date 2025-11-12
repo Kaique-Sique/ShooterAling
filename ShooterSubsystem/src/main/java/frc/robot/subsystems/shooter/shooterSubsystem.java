@@ -15,10 +15,7 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-import frc.robot.Constants.SubsystemConstants.shooterConstants.ShooterBigWheelConstans;
-import frc.robot.Constants.SubsystemConstants.shooterConstants.ShooterSmallWheelConstants;
-import frc.robot.utils.Conversions;
-//import frc.robot.Utils.Conversions;
+import frc.robot.Constants.SubsystemsConstants.shooterConstants.ShooterBigWheelConstans;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -53,11 +50,13 @@ public class ShooterSubsystem extends SubsystemBase {
     // initialize motors config
     initializeBigWheelMotors();
     //initializeSmallWheelsMotors();
+
+    SmartDashboard.putNumber("shooterMeasurements/BigWheelMotor/out", getBigWheelMotorCurrent());
   }
 
   /**
    * @ initialize motor of small wheel
-   *
+   *//* 
   private void initializeSmallWheelsMotors() {
     SparkMaxConfig globalConfig = new SparkMaxConfig();
 
@@ -81,9 +80,9 @@ public class ShooterSubsystem extends SubsystemBase {
         .maxOutput(1)
         .minOutput(-1);
 
-    MotorShooterSmallWheel.configure(globalConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    //MotorShooterSmallWheel.configure(globalConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    ShooterEncoderSmallWheel.setPosition(0);
+    //ShooterEncoderSmallWheel.setPosition(0);
   }*/
 
   /**
@@ -91,7 +90,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   private void initializeBigWheelMotors() {
     SparkMaxConfig globalConfig = new SparkMaxConfig();
-    SparkMaxConfig invertedConfig = new SparkMaxConfig();
+    SparkMaxConfig followerRightConfig = new SparkMaxConfig();
 
     // Encoder setup
     globalConfig.encoder
@@ -113,17 +112,21 @@ public class ShooterSubsystem extends SubsystemBase {
         .maxOutput(1)
         .minOutput(-1);
 
-    invertedConfig
+    followerRightConfig
         .apply(globalConfig)
-        .follow(MotorShooterBigWheel)
-        .inverted(true);
+        
+        .follow(MotorShooterBigWheel,true);
+        
+        //.inverted(true);
+        
+        
         
     // Reset and persist parameters
     MotorShooterBigWheel.configure(globalConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    MotorFollowerBigWheel.configure(invertedConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    MotorFollowerBigWheel.configure(followerRightConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    ShooterEncoderBigWheel.setPosition(0);
-    followerEncoderBigWheel.setPosition(0);
+    //ShooterEncoderBigWheel.setPosition(0);
+    //followerEncoderBigWheel.setPosition(0);
   }
 
   /**
@@ -137,24 +140,15 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   /**
-   * Set a pid controler speed to MPS of both wheels
+   * Set a pid controler speed to RadPs of both wheels
    * 
-   * @param mps setpoint in mps
+   * @param RadPs setpoint in Radps
    */
-  public void setMPS(double mps) {
-    double rpsSmallWheel;
-    double rpsBigWheel;
-
-    rpsSmallWheel = Conversions.MPSToRPS(mps,
-        ShooterSmallWheelConstants.kDiameterWheel,
-        ShooterSmallWheelConstants.kGearRatio);
-
-    rpsBigWheel = Conversions.MPSToRPS(mps,
-        ShooterBigWheelConstans.kDiameterBigWheel,
-        ShooterBigWheelConstans.kGearRatioMotor);
-
-    shooterBigWheelPID.setReference(mps / 1.7, ControlType.kVelocity);
-    //shooterSmallWheelPID.setReference(mps / 1.7, ControlType.kVelocity);
+  public void setRadPs(double RadPs) 
+  {
+    shooterBigWheelPID.setReference(RadPs / 1.7 / 2, ControlType.kVelocity);
+    //MotorFollowerBigWheel.setReference(RadPs / 1.7 / 2, ControlType.kVelocity);
+    //shooterSmallWheelPID.setReference(RadPs/ 1.7, ControlType.kVelocity);
   }
 
   /**
@@ -164,12 +158,31 @@ public class ShooterSubsystem extends SubsystemBase {
     MotorShooterBigWheel.set(0);
 
     //MotorShooterSmallWheel.set(0);
+    //MotorFollowerBigWheel.set(0);
+  }
+
+  public void setOutput(double out)
+  {
+    MotorShooterBigWheel.set(out);
+    //MotorFollowerBigWheel.set(out);
+
+    //MotorShooterSmallWheel.set(out * 2);
+  }
+
+
+  public void setDashboard()
+  {
+    double out = SmartDashboard.getNumber("shooterMeasurements/BigWheelMotor/out", 0.0);
+    MotorShooterBigWheel.set(out);
+    //MotorFollowerBigWheel.set(out);
+
+    //MotorShooterSmallWheel.set(out * 2);
   }
 
   @Override
   public void periodic() {
     ////////////////////////////////////////////////
-    // ***Measurements Shooter to smart dashboard**//
+    //***Measurements Shooter to smart dashboard**//
     ////////////////////////////////////////////////
 
     /// Big Wheel Motor
@@ -178,14 +191,44 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("shooterMeasurements/BigWheelMotor/kCurrent", getBigWheelMotorCurrent());
 
     // Small Wheel Motor
-    SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kPosition", getBigWheelEncoderPose());
-    SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kVelocity", getBigWheelEncoderSpeed());
+    //SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kPosition", getBigWheelEncoderPose());
+    //SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kVelocity", getBigWheelEncoderSpeed());
+    //SmartDashboard.putNumber("shooterMeasurements/SmallWheelMotor/kCurrent", getSmallWheelMotorCurrent());
 
     // Follower Motor
     SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kPosition", getFollowerEncoderPose());
     SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kVelocity", getFollowerEncoderSpeed());
+    SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kCurrent", getFollowerMotorCurrent());
+
+    
   }
 
+  /**
+   * get encoder position small wheel shooter
+   * 
+   * @return position degress
+   */
+  //public double getSmallWheelEncoderPose() {
+  //  return ShooterEncoderSmallWheel.getPosition();
+  //}
+
+  /**
+   * get encoder speed small wheel shooter
+   * 
+   * @return Speed from rpm
+   */
+  //public double getSmallWheelEncoderSpeed() {
+   // return ShooterEncoderSmallWheel.getVelocity();
+  //}
+
+  /**
+   * Get Motor Current
+   * 
+   * @return
+   */
+  //public double getSmallWheelMotorCurrent() {
+  //  return MotorShooterSmallWheel.getOutputCurrent();
+  //}
 
   /**
    * get encoder position small wheel shooter
@@ -244,5 +287,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public void resetEncoders() {
     ShooterEncoderBigWheel.setPosition(0);
     followerEncoderBigWheel.setPosition(0);
+
+    //ShooterEncoderSmallWheel.setPosition(0);
   }
 }

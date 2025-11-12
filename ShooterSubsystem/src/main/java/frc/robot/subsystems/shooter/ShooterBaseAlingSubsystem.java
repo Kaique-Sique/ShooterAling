@@ -6,20 +6,21 @@ package frc.robot.subsystems.shooter;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
+import com.revrobotics.spark.config.MAXMotionConfig;
+import com.revrobotics.spark.config.MAXMotionConfig.MAXMotionPositionMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.SubsystemConstants.shooterConstants.ShooterBaseConstants;
-import frc.robot.utils.OptimizePose;
-
+import frc.robot.Constants.SubsystemsConstants.shooterConstants.ShooterBaseConstants;
 public class ShooterBaseAlingSubsystem extends SubsystemBase {
   private final SparkMax motorBase;
 
@@ -51,7 +52,7 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
     glConfig
       .smartCurrentLimit(ShooterBaseConstants.kCurrentLimitMotor)
       .idleMode(ShooterBaseConstants.kIdleMode)
-      .inverted(false);
+      .inverted(true);
 
     // PID setup
     glConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -61,6 +62,15 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
       .velocityFF(0.0)
       .maxOutput(1)
       .minOutput(-1);
+
+      MAXMotionConfig maxMotion = glConfig.closedLoop.maxMotion;
+
+      maxMotion
+        .positionMode(MAXMotionPositionMode.kMAXMotionTrapezoidal, ClosedLoopSlot.kSlot0)
+        .maxAcceleration(34200 * 2, ClosedLoopSlot.kSlot0)
+        .maxVelocity(34200, ClosedLoopSlot.kSlot0)
+
+        .allowedClosedLoopError(0.85, ClosedLoopSlot.kSlot0);
 
       glConfig.softLimit
         .forwardSoftLimit(ShooterBaseConstants.kSoftLimitMax)
@@ -111,12 +121,8 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
    * @param targetPose from degrees
    */
   public void setPIDPosition(double targetPose)
-  {
-    double correctPose = OptimizePose.softLimitOptimize(targetPose, 
-    ShooterBaseConstants.kSoftLimitMin, 
-    ShooterBaseConstants.kSoftLimitMax);
-    
-    basePIDController.setReference(correctPose, ControlType.kPosition);
+  { 
+    basePIDController.setReference(targetPose, ControlType.kMAXMotionPositionControl);
   }
 
   /** 
@@ -163,6 +169,6 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
    */
   public Boolean isEnableAutoAling()
   {
-      return autoAling;
+    return autoAling;
   }
 }

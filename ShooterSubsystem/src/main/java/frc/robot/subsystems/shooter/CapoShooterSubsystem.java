@@ -19,7 +19,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.SubsystemConstants.shooterConstants.CapoConstants;
+import frc.robot.Constants.SubsystemsConstants.shooterConstants.CapoConstants;
 
 public class CapoShooterSubsystem extends SubsystemBase {
   //Motor instance
@@ -125,7 +125,7 @@ public class CapoShooterSubsystem extends SubsystemBase {
    */
   public void setTargetPosePID(double pose)
   {
-    mController.setReference(pose, ControlType.kPosition);
+    mController.setReference(pose, ControlType.kMAXMotionPositionControl);
   }
 
   /** 

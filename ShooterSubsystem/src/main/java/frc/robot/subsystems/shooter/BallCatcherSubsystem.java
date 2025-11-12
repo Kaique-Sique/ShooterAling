@@ -15,8 +15,7 @@ import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.SubsystemConstants.shooterConstants.CatcherConstants;
-import frc.robot.utils.Conversions;
+import frc.robot.Constants.SubsystemsConstants.shooterConstants.CatcherConstants;
 
 public class BallCatcherSubsystem extends SubsystemBase {
   private final SparkMax motorCatcher;
@@ -122,18 +121,13 @@ public class BallCatcherSubsystem extends SubsystemBase {
   }
 
   /**
-   * Set a pid controler speed to MPS of both wheels
+   * Set a pid controler speed to RadPS
    * 
-   * @param mps setpoint in mps
+   * @param RadPS setpoint in mps
    */
-  public void setMPSTarget(double MPSspeed)
+  public void setMPSTarget(double Radspeed)
   {
-    double rps;
-    rps = Conversions.MPSToRPS(MPSspeed,
-        CatcherConstants.kDiameterWheel,
-        CatcherConstants.kGearRatio);
-
-    PIDControler.setReference(MPSspeed, ControlType.kVelocity);
+    PIDControler.setReference(Radspeed, ControlType.kVelocity);
   }
 
   /**
