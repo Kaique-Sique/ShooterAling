@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.commands.shooterCmds.BaseAlingCmd;
 import frc.robot.commands.shooterCmds.CapoAlingCmd;
 import frc.robot.commands.shooterCmds.ShootCmd;
 import frc.robot.subsystems.shooter.BallCatcherSubsystem;
@@ -23,14 +22,12 @@ public class RobotContainer {
   public static final BallCatcherSubsystem ballCatcher = new BallCatcherSubsystem();
   public static final CapoShooterSubsystem capoShooter = new CapoShooterSubsystem();
 
-  // Commands Instanc
-  public static final BaseAlingCmd m_baseAling = new BaseAlingCmd();
-
+  // Driver controller instance
   private final CommandXboxController m_driverController =
       new CommandXboxController(JoystickDriverConstants.kDriverControllerPort);
 
+  // Robot container constructor
   public RobotContainer() {
-    m_baseAling.addRequirements(baseShooter);
     configureBindings();
   }
 
@@ -39,10 +36,15 @@ public class RobotContainer {
     /******* Shooter Commands *******/
     // Capo Aling to dashboard target pose
     m_driverController.a().onTrue(new CapoAlingCmd());
+
+    // Shoot Command
     m_driverController.x().onTrue(new ShootCmd());
+
+    // Ball catcher control 
     m_driverController.y().whileTrue(new RunCommand(()-> ballCatcher.setSpeedTarget(5600), ballCatcher))
         .onFalse(new InstantCommand(()-> ballCatcher.stopMotor(), ballCatcher));
     
+    // Shooter set output to 20%
     m_driverController.b().whileTrue(new RunCommand(()-> shooterSubsys.setOutput(0.20), shooterSubsys))
         .onFalse(new InstantCommand(()-> shooterSubsys.stopMotors(), shooterSubsys));
 
@@ -55,7 +57,7 @@ public class RobotContainer {
         .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
 
 
-    // Home position
+    // Base HomePosition
     m_driverController.povRight()
       .whileTrue(new RunCommand(()-> baseShooter.setPIDPosition(0), baseShooter))
       .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
