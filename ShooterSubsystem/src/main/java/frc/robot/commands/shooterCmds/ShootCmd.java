@@ -21,7 +21,7 @@ public class ShootCmd extends SequentialCommandGroup {
   public ShootCmd() {
     addCommands(
       // Initialize Shooter Motors
-      new InstantCommand(()-> m_ShooterSubsystem.setOutput(0.2), m_ShooterSubsystem),
+      new ShooterOutCmd(),
 
       // Wait a time to shooter get his target speed
       new WaitCommand(1),

@@ -203,5 +203,10 @@ import edu.wpi.first.math.util.Units;
       public static final double kSoftLimitMax = 1.0;*/
       
     } 
+
+    public static final class JoystickDriverConstants 
+    {
+      public static final int kDriverControllerPort = 0;
+    }
   } 
 }
