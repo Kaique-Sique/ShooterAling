@@ -52,6 +52,8 @@ public class ShooterSubsystem extends SubsystemBase {
     //initializeSmallWheelsMotors();
 
     SmartDashboard.putNumber("shooterMeasurements/BigWheelMotor/out", getBigWheelMotorCurrent());
+
+    SmartDashboard.putNumber("shooterMeasurements/hipDistance", 0.0);
   }
 
   /**
@@ -199,8 +201,6 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kPosition", getFollowerEncoderPose());
     SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kVelocity", getFollowerEncoderSpeed());
     SmartDashboard.putNumber("shooterMeasurements/FollowerMotor/kCurrent", getFollowerMotorCurrent());
-
-    
   }
 
   /**
