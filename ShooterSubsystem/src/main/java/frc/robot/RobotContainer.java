@@ -13,6 +13,7 @@ import frc.robot.commands.shooterCmds.CapoAlingCmd;
 import frc.robot.commands.shooterCmds.ShootCmd;
 import frc.robot.subsystems.shooter.BallCatcherSubsystem;
 import frc.robot.subsystems.shooter.CapoShooterSubsystem;
+import frc.robot.subsystems.shooter.RobotPoseOnTheField;
 import frc.robot.subsystems.shooter.ShooterBaseAlingSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
@@ -22,6 +23,7 @@ public class RobotContainer {
   public static final ShooterBaseAlingSubsystem baseShooter = new ShooterBaseAlingSubsystem();
   public static final BallCatcherSubsystem ballCatcher = new BallCatcherSubsystem();
   public static final CapoShooterSubsystem capoShooter = new CapoShooterSubsystem();
+  public static final RobotPoseOnTheField robotPoseOnTheField = new RobotPoseOnTheField();
 
   // Driver controller instance
   private final CommandXboxController m_driverController =

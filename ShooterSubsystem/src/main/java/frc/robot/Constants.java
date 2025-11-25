@@ -8,6 +8,10 @@ package frc.robot;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 //REV Imports
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 //WPI Imports
 import edu.wpi.first.math.util.Units;
 
@@ -212,6 +216,22 @@ import edu.wpi.first.math.util.Units;
     public static final class DriveConstants
     {
       public static final String limelightFrontLeft = "limelight-left";
+    }
+
+    public static final class FieldPoses 
+    {
+      public static final class redPoses 
+      {
+        public static final Pose2d tag10 = 
+                            new Pose2d(new Translation2d(0.0,0.0), 
+                                      new Rotation2d(0));
+      } 
+      public static final class bluePoses 
+      {
+        public static final Pose2d tag21 = 
+                            new Pose2d(new Translation2d(16.54175,8.0137), 
+                                      new Rotation2d(Math.PI));
+      }
     }
   } 
 }
