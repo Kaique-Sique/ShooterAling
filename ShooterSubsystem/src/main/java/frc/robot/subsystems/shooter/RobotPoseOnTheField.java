@@ -5,6 +5,8 @@
 package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemsConstants.DriveConstants;
 import frc.robot.Limelight.LimelightHelpers;
@@ -13,6 +15,15 @@ public class RobotPoseOnTheField extends SubsystemBase {
   Pose2d robotPose2d;
   boolean isCameraPoseSetted = false;
 
+  /**
+   * NetworkTables publisher for Pose2d data.
+   * Useful for debugging and visualization in tools like Shuffleboard or custom dashboards.
+   * Advantage Scope: Can visualize robot pose in real-time.
+   */
+  private StructPublisher<Pose2d> publisher = NetworkTableInstance.getDefault()
+                                                                  .getStructTopic("MyPose", Pose2d.struct)
+                                                                  .publish();
+  
   public RobotPoseOnTheField() {
   }
 
@@ -33,6 +44,7 @@ public class RobotPoseOnTheField extends SubsystemBase {
         robotPose2d = currentPose;
       }
     }
+    publisher.set(robotPose2d);
   }
 
   public Pose2d getRobotPose() {
