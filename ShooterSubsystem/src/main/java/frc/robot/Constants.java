@@ -208,5 +208,10 @@ import edu.wpi.first.math.util.Units;
     {
       public static final int kDriverControllerPort = 0;
     }
+
+    public static final class DriveConstants
+    {
+      public static final String limelightFrontLeft = "limelight-left";
+    }
   } 
 }
