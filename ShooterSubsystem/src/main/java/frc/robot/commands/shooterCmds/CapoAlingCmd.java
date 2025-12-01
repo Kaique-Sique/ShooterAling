@@ -46,11 +46,6 @@ public class CapoAlingCmd extends Command {
 
     //if capo is in position, finish command
     capoSubsystem.setTargetPosePID(targetPose);
-    if (capoSubsystem.getEncoderValue() + 2 >= targetPose && 
-    capoSubsystem.getEncoderValue() - 2 <= targetPose) 
-    {
-      finished = true;
-    }
     System.out.println("finish:" + finished);
   }
 

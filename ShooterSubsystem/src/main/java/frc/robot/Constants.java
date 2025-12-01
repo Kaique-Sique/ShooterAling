@@ -76,8 +76,8 @@ import edu.wpi.first.math.util.Units;
         public static final double kd = 0.002;
         public static final double ki = 0.0;
 
-        public static final double kSoftLimitMax = 50;
-        public static final double kSoftLimitMin = -12;
+        public static final double kSoftLimitMax = 60;
+        public static final double kSoftLimitMin = -60;
       }
 
       public static final class CatcherConstants 
@@ -215,15 +215,15 @@ import edu.wpi.first.math.util.Units;
 
     public static final class DriveConstants
     {
-      public static final String limelightFrontLeft = "limelight-left";
+      public static final String limelightFrontLeft = "limelight-rback";
     }
 
     public static final class FieldPoses 
     {
       public static final class redPoses 
       {
-        public static final Pose2d tag10 = 
-                            new Pose2d(new Translation2d(0.0,0.0), 
+        public static final Pose2d tag07 = 
+                            new Pose2d(new Translation2d(13.9, 4.02), 
                                       new Rotation2d(0));
       } 
       public static final class bluePoses 

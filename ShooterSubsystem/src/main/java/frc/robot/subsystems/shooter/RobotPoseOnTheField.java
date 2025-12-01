@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.shooter;
 
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructPublisher;
@@ -37,7 +38,7 @@ public class RobotPoseOnTheField extends SubsystemBase {
     }
     else 
     {
-      Pose2d currentPose = limeLightMt1();
+      Pose2d currentPose = limeLightMt2();
 
       if(currentPose != null)
       {
@@ -53,7 +54,7 @@ public class RobotPoseOnTheField extends SubsystemBase {
 
   public void setCameraPoseOnRobot() 
   {  
-    LimelightHelpers.setCameraPose_RobotSpace(DriveConstants.limelightFrontLeft,0.110,0.259,0.410,0,0,0);
+    LimelightHelpers.setCameraPose_RobotSpace(DriveConstants.limelightFrontLeft,0.155,-0.14,0.27,0,0,0);
     LimelightHelpers.SetIMUMode(DriveConstants.limelightFrontLeft, 2);
   }
 
@@ -61,8 +62,9 @@ public class RobotPoseOnTheField extends SubsystemBase {
     Pose2d robotPose2d = new Pose2d();
 
     boolean doRejectUpdate = false;
-    LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
-      
+    LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue(DriveConstants.limelightFrontLeft);
+    if(mt1 == null) return null;
+
       if(mt1.tagCount == 1 && mt1.rawFiducials.length == 1)
       {
         if(mt1.rawFiducials[0].ambiguity > .7)
@@ -89,4 +91,23 @@ public class RobotPoseOnTheField extends SubsystemBase {
         return null;
       }
   }
+
+  private Pose2d limeLightMt2() {
+
+    boolean doRejectUpdate = false;
+      LimelightHelpers.SetRobotOrientation(DriveConstants.limelightFrontLeft, 0, 0, 0, 0, 0, 0);
+  LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(DriveConstants.limelightFrontLeft);
+  if(mt2 == null) return null;
+  
+  if(mt2.tagCount == 0)
+  {
+    doRejectUpdate = true;
+  }
+  if(!doRejectUpdate)
+  {
+    return mt2.pose;
+  }
+  else return null;
 }
+}
+

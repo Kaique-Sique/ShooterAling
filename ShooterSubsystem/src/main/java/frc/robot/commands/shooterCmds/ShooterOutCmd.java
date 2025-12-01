@@ -60,9 +60,9 @@ public class ShooterOutCmd extends Command {
     // Calc relativa hip from robot and target
     double hip = Math.sqrt(
            Math.pow(
-                Math.abs(robotPose2d.getX() - FieldPoses.redPoses.tag10.getX()), 2)
+                Math.abs(robotPose2d.getX() - FieldPoses.redPoses.tag07.getX()), 2)
                       + Math.pow(
-                    Math.abs(robotPose2d.getY() - FieldPoses.redPoses.tag10.getY()), 2));
+                    Math.abs(robotPose2d.getY() - FieldPoses.redPoses.tag07.getY()), 2));
 
 
     //***Gets shooter target dist from smartdashboard****

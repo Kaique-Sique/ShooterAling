@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.SubsystemsConstants.JoystickDriverConstants;
+import frc.robot.commands.shooterCmds.BasePositionAling;
 import frc.robot.commands.shooterCmds.CapoAlingCmd;
+import frc.robot.commands.shooterCmds.CapoPositionAling;
 import frc.robot.commands.shooterCmds.ShootCmd;
 import frc.robot.subsystems.shooter.BallCatcherSubsystem;
 import frc.robot.subsystems.shooter.CapoShooterSubsystem;
@@ -53,12 +55,7 @@ public class RobotContainer {
 
     // Manual Aling
     m_driverController.povUp()
-        .whileTrue(new RunCommand(()->baseShooter.setOutput(0.1), baseShooter))
-        .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
-        m_driverController.povDown()
-        .whileTrue(new RunCommand(()->baseShooter.setOutput(-0.1), baseShooter))
-        .onFalse(new InstantCommand(()-> baseShooter.stopMotor(), baseShooter));
-
+      .onTrue(new BasePositionAling().alongWith(new CapoPositionAling()));
 
     // Base HomePosition
     m_driverController.povRight()
