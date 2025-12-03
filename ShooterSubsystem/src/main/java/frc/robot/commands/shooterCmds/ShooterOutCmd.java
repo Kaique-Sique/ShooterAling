@@ -5,6 +5,7 @@
 package frc.robot.commands.shooterCmds;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SubsystemsConstants.FieldPoses;
@@ -66,9 +67,10 @@ public class ShooterOutCmd extends Command {
 
 
     //***Gets shooter target dist from smartdashboard****
-    //Important: make sure the value is in meters
+    //Important: make sue the value is in meters
     //double hip = SmartDashboard.getNumber("shooterMeasurements/hipDistance", 0.0);
-
-    return 0.123 *  Math.log(hip) + 0.145;
+    System.out.println("Dist: " + hip);
+    return -0.0125 * Math.pow(hip, 2) + 0.0752 * hip + 0.1404;
+    //return hip;
   }
 }

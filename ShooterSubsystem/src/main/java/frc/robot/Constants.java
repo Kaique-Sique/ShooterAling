@@ -115,7 +115,7 @@ import edu.wpi.first.math.util.Units;
         public static final double kSoftLimitMin = 0;
         public static final boolean kEnableSoftLimitMin = true;
 
-        public static final double multiplicadorTargerDist = 45;
+        public static final double multiplicadorTargerDist = 50;
       }
     }
 
