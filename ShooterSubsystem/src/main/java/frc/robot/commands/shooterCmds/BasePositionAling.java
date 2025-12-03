@@ -86,6 +86,7 @@ public class BasePositionAling extends Command {
   {
     //GetRobotPose
     robotPose2d = robotPose.getRobotPose();
+    if (robotPose2d == null) return 0.0;
 
     // Get Target Pose based on swerve 
     targetPose = Units.radiansToDegrees(

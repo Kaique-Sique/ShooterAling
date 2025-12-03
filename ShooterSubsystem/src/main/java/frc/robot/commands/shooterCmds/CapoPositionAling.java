@@ -74,7 +74,6 @@ public class CapoPositionAling extends Command {
     return finished;
   }
 
-  
   /**
    * Calc hip from robot dist to target
    * 
@@ -84,6 +83,9 @@ public class CapoPositionAling extends Command {
   {
     // Get swerve Positions
     robotPose2d = robotPose.getRobotPose();
+
+    // its check if the robot already saw any tag
+    if(robotPose2d == null) return 0.0;
     
     // Calc relativa hip from robot and target
     double hip = Math.sqrt(
