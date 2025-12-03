@@ -67,7 +67,7 @@ import edu.wpi.first.math.util.Units;
       {
         public static final int kMotorId = 35;
 
-        public static final double kGearRatio = 103.125;
+        public static final double kGearRatio = 83.3;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
         public static final int kCurrentLimitMotor = 40;
@@ -115,7 +115,7 @@ import edu.wpi.first.math.util.Units;
         public static final double kSoftLimitMin = 0;
         public static final boolean kEnableSoftLimitMin = true;
 
-        public static final double multiplicadorTargerDist = 50;
+        public static final double multiplicadorTargerDist = 65;
       }
     }
 

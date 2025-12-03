@@ -56,9 +56,9 @@ public class ShooterOutCmd extends Command {
   public double getShooterOut()
   {
     // Get swerve Positions
-    //Pose2d robotPose2d = mRobotPose.getRobotPose();
+    Pose2d robotPose2d = mRobotPose.getRobotPose();
 
-    //if (robotPose2d == null) return 0.0;
+    if (robotPose2d == null) return 0.0;
 
     // Calc relativa hip from robot and target
     //double hip = Math.sqrt(
@@ -71,7 +71,7 @@ public class ShooterOutCmd extends Command {
     //***Gets shooter target dist from smartdashboard****
     //Important: make sue the value is in meters
     double hip = SmartDashboard.getNumber("shooterMeasurements/hipDistance", 0.0);
-    //System.out.println("Dist: " + hip);
+    System.out.println("Dist: " + hip);
     //return -0.0125 * Math.pow(hip, 2) + 0.0752 * hip + 0.1404;
     return hip;
   }

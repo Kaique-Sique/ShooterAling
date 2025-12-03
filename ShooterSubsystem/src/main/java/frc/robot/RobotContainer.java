@@ -38,7 +38,11 @@ public class RobotContainer {
       new CommandXboxController(JoystickDriverConstants.kDriverControllerPort);
 
   // Robot container constructor
-  public RobotContainer() {
+  public RobotContainer() 
+  {
+    baseShooter.setDefaultCommand(new BasePositionAling());
+    capoShooter.setDefaultCommand(new CapoAlingCmd());
+
     configureBindings();
   }
 
@@ -73,6 +77,7 @@ public class RobotContainer {
         .andThen(
           new InstantCommand(()-> capoShooter.stopMotors(), capoShooter))
               );
+
     // shoot with out
     m_driverController.povDown()
       .whileTrue(new ShooterOutCmd())

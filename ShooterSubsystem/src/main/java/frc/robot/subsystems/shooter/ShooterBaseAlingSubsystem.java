@@ -52,7 +52,7 @@ public class ShooterBaseAlingSubsystem extends SubsystemBase {
     glConfig
       .smartCurrentLimit(ShooterBaseConstants.kCurrentLimitMotor)
       .idleMode(ShooterBaseConstants.kIdleMode)
-      .inverted(true);
+      .inverted(false);
 
     // PID setup
     glConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)

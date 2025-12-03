@@ -45,6 +45,7 @@ public class CapoAlingCmd extends Command {
     //capoSubsystem.setTargetPosePID(targetPose);
 
     //if capo is in position, finish command
+    targetPose = SmartDashboard.getNumber("shooterMeasurements/CapoMotor/targetPose", 0.0);
     capoSubsystem.setTargetPosePID(targetPose);
     System.out.println("finish:" + finished);
   }
