@@ -8,6 +8,10 @@ package frc.robot;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 //REV Imports
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 //WPI Imports
 import edu.wpi.first.math.util.Units;
 
@@ -63,7 +67,7 @@ import edu.wpi.first.math.util.Units;
       {
         public static final int kMotorId = 35;
 
-        public static final double kGearRatio = 103.125;
+        public static final double kGearRatio = 83.3;
 
         public static final IdleMode kIdleMode = IdleMode.kCoast;
         public static final int kCurrentLimitMotor = 40;
@@ -72,8 +76,8 @@ import edu.wpi.first.math.util.Units;
         public static final double kd = 0.002;
         public static final double ki = 0.0;
 
-        public static final double kSoftLimitMax = 50;
-        public static final double kSoftLimitMin = -12;
+        public static final double kSoftLimitMax = 60;
+        public static final double kSoftLimitMin = -60;
       }
 
       public static final class CatcherConstants 
@@ -111,7 +115,7 @@ import edu.wpi.first.math.util.Units;
         public static final double kSoftLimitMin = 0;
         public static final boolean kEnableSoftLimitMin = true;
 
-        public static final double multiplicadorTargerDist = 45;
+        public static final double multiplicadorTargerDist = 65;
       }
     }
 
@@ -207,6 +211,27 @@ import edu.wpi.first.math.util.Units;
     public static final class JoystickDriverConstants 
     {
       public static final int kDriverControllerPort = 0;
+    }
+
+    public static final class DriveConstants
+    {
+      public static final String limelightFrontLeft = "limelight-rback";
+    }
+
+    public static final class FieldPoses 
+    {
+      public static final class redPoses 
+      {
+        public static final Pose2d tag07 = 
+                            new Pose2d(new Translation2d(13.9, 4.02), 
+                                      new Rotation2d(0));
+      } 
+      public static final class bluePoses 
+      {
+        public static final Pose2d tag21 = 
+                            new Pose2d(new Translation2d(16.54175,8.0137), 
+                                      new Rotation2d(Math.PI));
+      }
     }
   } 
 }

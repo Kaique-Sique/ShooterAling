@@ -4,10 +4,13 @@
 
 package frc.robot.commands.shooterCmds;
 
-//import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.SubsystemsConstants.FieldPoses;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.shooter.RobotPoseOnTheField;
 //import frc.robot.utils.FieldPoses;
 //import frc.robot.subsystems.Swerve.SwerveSubsystem;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
@@ -15,7 +18,7 @@ import frc.robot.subsystems.shooter.ShooterSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShooterOutCmd extends Command {
   private final ShooterSubsystem mShooterSubsystem = RobotContainer.shooterSubsys;
-  //private final SwerveSubsystem swerveDrive = RobotContainer.swerveDrive;
+  private final RobotPoseOnTheField mRobotPose = RobotContainer.robotPoseOnTheField;
 
   double out;
   boolean finished = false;
@@ -53,19 +56,23 @@ public class ShooterOutCmd extends Command {
   public double getShooterOut()
   {
     // Get swerve Positions
-    //Pose2d robotPose2d = swerveDrive.getPoseEstimator();
+    Pose2d robotPose2d = mRobotPose.getRobotPose();
+
+    if (robotPose2d == null) return 0.0;
 
     // Calc relativa hip from robot and target
     //double hip = Math.sqrt(
-    //       Math.pow(
-    //            Math.abs(robotPose2d.getX() - FieldPoses.redPoses.tag02.getX()), 2)
+    //      Math.pow(
+    //            Math.abs(robotPose2d.getX() - FieldPoses.redPoses.tag07.getX()), 2)
     //                  + Math.pow(
-    //                Math.abs(robotPose2d.getY() - FieldPoses.redPoses.tag02.getY()), 2));
+    //                Math.abs(robotPose2d.getY() - FieldPoses.redPoses.tag07.getY()), 2));
 
 
     //***Gets shooter target dist from smartdashboard****
-    //Important: make sure the value is in meters
+    //Important: make sue the value is in meters
     double hip = SmartDashboard.getNumber("shooterMeasurements/hipDistance", 0.0);
-    return 0.123 *  Math.log(hip) + 0.145;
+    System.out.println("Dist: " + hip);
+    //return -0.0125 * Math.pow(hip, 2) + 0.0752 * hip + 0.1404;
+    return hip;
   }
 }
